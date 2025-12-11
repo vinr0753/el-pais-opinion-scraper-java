@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="ElPais CrossBrowser Suite" parallel="tests" thread-count="5">
+
+	<!--
+        Default parameter values. executionEnv can be overridden:
+        -DexecutionEnv=local  OR provide <parameter name="executionEnv"/> in the suite.
+        Default here is "browserstack" (cloud).
+    -->
+	<parameter name="executionEnv" value="browserstack" />
+
+	<!-- project/build/log params for BrowserStack bstack:options -->
+	<parameter name="projectName" value="ElPaisScraper" />
+	<parameter name="buildName" value="ElPaisScraper - Test" />
+	<parameter name="debug" value="false" />
+	<parameter name="networkLogs" value="true" />
+	<parameter name="consoleLogs" value="info" />
+
+	<!-- Register the listener that marks BrowserStack session status -->
+	<listeners>
+		<listener
+			class-name="com.browserstack.assignment.selenium_el_pais_scraper.BrowserStackTestStatusListener" />
+	</listeners>
+
+	<!-- 5 test entries: each will execute the same test class but with
+	different capabilities -->
+	<test name="macOS-Ventura-Chrome-141">
+		<parameter name="browserName" value="Chrome" />
+		<parameter name="browserVersion" value="141.0" />
+		<parameter name="os" value="OS X" />
+		<parameter name="osVersion" value="Ventura" />
+		<classes>
+			<class
+				name="com.browserstack.assignment.selenium_el_pais_scraper.ElPaisScraper" />
+		</classes>
+	</test>
+
+	<test name="Windows10-Chrome-141">
+		<parameter name="browserName" value="Chrome" />
+		<parameter name="browserVersion" value="141.0" />
+		<parameter name="os" value="Windows" />
+		<parameter name="osVersion" value="10" />
+		<classes>
+			<class
+				name="com.browserstack.assignment.selenium_el_pais_scraper.ElPaisScraper" />
+		</classes>
+	</test>
+
+	<test name="Windows11-Chrome-latest">
+		<parameter name="browserName" value="Chrome" />
+		<parameter name="browserVersion" value="latest" />
+		<parameter name="os" value="Windows" />
+		<parameter name="osVersion" value="11" />
+		<classes>
+			<class
+				name="com.browserstack.assignment.selenium_el_pais_scraper.ElPaisScraper" />
+		</classes>
+	</test>
+
+	<test name="macOS-Monterey-Chrome-latest">
+		<parameter name="browserName" value="Chrome" />
+		<parameter name="browserVersion" value="latest" />
+		<parameter name="os" value="OS X" />
+		<parameter name="osVersion" value="Monterey" />
+		<classes>
+			<class
+				name="com.browserstack.assignment.selenium_el_pais_scraper.ElPaisScraper" />
+		</classes>
+	</test>
+
+	<!-- Mobile device test -->
+	<test name="Samsung-Galaxy-S24">
+		<parameter name="browserName" value="Chrome" />
+		<parameter name="deviceName" value="Samsung Galaxy S24" />
+		<parameter name="osVersion" value="16.0" />
+		<classes>
+			<class
+				name="com.browserstack.assignment.selenium_el_pais_scraper.ElPaisScraper" />
+		</classes>
+	</test>
+
+</suite>
